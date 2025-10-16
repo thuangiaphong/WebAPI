@@ -1,0 +1,61 @@
+﻿@model List<webMVC.Models.DTO.BookDTO>
+
+@{
+    ViewData["Title"] = "Danh sách Sách";
+}
+
+<h1>@ViewData["Title"]</h1>
+
+<p>
+    <a class="btn btn-success" asp-action="Add">Thêm Sách mới</a>
+</p>
+
+@if (TempData["error"] != null)
+{
+    <div class="alert alert-danger">
+        @TempData["error"]
+    </div>
+}
+
+@if (ViewBag.Error != null)
+{
+    <div class="alert alert-danger">
+        @ViewBag.Error
+    </div>
+}
+
+@if (Model != null && Model.Any())
+{
+    <table class="table table-bordered table-striped">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Tiêu đề</th>
+                <th>Nhà xuất bản</th>
+                <th>Tác giả</th>
+                <th>Hành động</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var book in Model)
+            {
+                <tr>
+                    <td>@book.Id</td>
+                    <td>@book.Title</td>
+                    <td>@book.PublisherName</td>
+                    <td>
+                        @string.Join(", ", book.AuthorNames)  <!-- Giả sử AuthorNames là list<string> trong BookDTO -->
+                    </td>
+                    <td>
+                        <a class="btn btn-warning btn-sm" asp-action="Edit" asp-route-id="@book.Id">Sửa</a>
+                        <a class="btn btn-danger btn-sm" asp-action="Delete" asp-route-id="@book.Id">Xóa</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+else
+{
+    <p>Không có sách nào khả dụng.</p>
+}
