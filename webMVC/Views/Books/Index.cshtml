@@ -7,7 +7,7 @@
 <h1>@ViewData["Title"]</h1>
 
 <p>
-    <a class="btn btn-success" asp-action="Add">Thêm Sách mới</a>
+    <a class="btn btn-success" asp-controller="Books" asp-action="Add">Thêm Sách mới</a>
 </p>
 
 @if (TempData["error"] != null)
@@ -47,7 +47,7 @@
                         @string.Join(", ", book.AuthorNames)  <!-- Giả sử AuthorNames là list<string> trong BookDTO -->
                     </td>
                     <td>
-                        <a class="btn btn-warning btn-sm" asp-action="Edit" asp-route-id="@book.Id">Sửa</a>
+                        <a href="/Books/editBook/@book.Id" class="btn btn-warning">Sửa</a>
                         <a class="btn btn-danger btn-sm" asp-action="Delete" asp-route-id="@book.Id">Xóa</a>
                     </td>
                 </tr>

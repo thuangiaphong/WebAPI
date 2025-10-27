@@ -1,0 +1,63 @@
+﻿@model webMVC.Models.DTO.BookDTO
+
+<h1>Thông tin sách:</h1>
+
+@if (Model != null)
+{
+    <img src="@Model.CoverUrl" style="float:left; width:200px; margin-right:10px; border-radius:10px;" />
+    <div style="overflow:hidden;">
+        <p><strong>Tên sách:</strong> @Model.Title</p>
+        <p><strong>Mô tả:</strong> @Model.Description</p>
+        <p><strong>Ngày đọc:</strong> @Model.DateRead?.ToString("dd/MM/yyyy")</p>
+
+        <p><strong>Đã đọc chưa?</strong></p>
+        @if (Model.IsRead)
+        {
+            <input type="radio" id="isReadYes" name="isRead" value="Yes" checked> <label for="isReadYes">Đã đọc</label>
+            <input type="radio" id="isReadNo" name="isRead" value="No"> <label for="isReadNo">Chưa đọc</label>
+        }
+        else
+        {
+            <input type="radio" id="isReadYes" name="isRead" value="Yes"> <label for="isReadYes">Đã đọc</label>
+            <input type="radio" id="isReadNo" name="isRead" value="No" checked> <label for="isReadNo">Chưa đọc</label>
+        }
+
+        <p><strong>Đánh giá:</strong></p>
+        @if (Model.IsRead && Model.Rate > 0)
+        {
+            for (var i = 0; i < Model.Rate; i++)
+            {
+                <span style="color: gold;">★</span>
+            }
+        }
+        else
+        {
+            <span>Chưa đọc nên chưa có đánh giá</span>
+        }
+
+        <p><strong>Thể loại:</strong> @Model.Genre</p>
+        <p><strong>Ngày thêm:</strong> @Model.DateAdded.ToString("dd/MM/yyyy")</p>
+        <p><strong>Nhà xuất bản:</strong> @Model.PublisherName</p>
+
+        <p><strong>Tác giả:</strong></p>
+        @if (Model.AuthorNames != null && Model.AuthorNames.Any())
+        {
+            @foreach (var item in Model.AuthorNames)
+            {
+                <a href="#">@item</a><span> </span>
+            }
+        }
+        else
+        {
+            <span>Không có thông tin tác giả</span>
+        }
+    </div>
+
+    <div style="clear:both; margin-top:20px;">
+        <a href="/Books/Index" class="btn btn-primary">← Quay lại danh sách</a>
+    </div>
+}
+else
+{
+    <p>Không tìm thấy thông tin sách.</p>
+}

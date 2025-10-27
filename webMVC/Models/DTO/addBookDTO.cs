@@ -4,16 +4,22 @@ namespace webMVC.Models.DTO
 {
     public class AddBookDTO
     {
-        public string title { get; set; }
-        public string? description { get; set; }
-        public bool isRead { get; set; }
-        public DateTime? dateRead { get; set; }
+        [Required, MinLength(10)]
+        public string? Title { get; set; }
+        public string? Description { get; set; }
+        public bool IsRead { get; set; }
+        public DateTime? DateRead { get; set; }
+
         [Range(0, 5, ErrorMessage = "From 0 to 5")]
-        public int? rate { get; set; }
-        public string? genre { get; set; }
-        public string? coverUrl { get; set; }
-        public DateTime dateAdded { get; set; }
-        public int publisherID { get; set; }
-        public List<int> authorIds { get; set; }
+        public int? Rate { get; set; }
+
+        public string? Genre { get; set; }
+        public string? CoverUrl { get; set; }
+
+        public DateTime DateAdded { get; set; } = DateTime.Now;
+
+        public int PublisherID { get; set; }
+
+        public List<int> AuthorIds { get; set; } = new List<int>();
     }
 }

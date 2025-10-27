@@ -4,39 +4,51 @@
     var listPublisher = ViewBag.ListPublisher;
 }
 
+<h2>Thêm Sách Mới</h2>
+
 <form asp-controller="Books" asp-action="addBook" method="POST">
     <label>Title</label>
-    <input type="text" name="title" asp-for="title" /><span asp-validation-for="title" class="text-danger"></span><br>
-    <label>Descriptions</label>
-    <input type="text" name="description" asp-for="description" /><br>
+    <input type="text" asp-for="Title" /><br>
+
+    <label>Description</label>
+    <input type="text" asp-for="Description" /><br>
+
     <label>IsRead</label>
-    <input type="radio" name="IsRead" asp-for="isRead" value="True" /> Yes
-    <input type="radio" name="IsRead" asp-for="isRead" value="False" /> No<br>
+    <input type="radio" asp-for="IsRead" value="True" /> Yes
+    <input type="radio" asp-for="IsRead" value="False" /> No<br>
+
     <label>DateRead</label>
-    <input type="date" name="dateRead" asp-for="dateRead" /><br>
+    <input type="date" asp-for="DateRead" /><br>
+
     <label>Rate</label>
-    <input type="number" name="rate" asp-for="rate" /><br>
+    <input type="number" asp-for="Rate" /><br>
+
     <label>Genre</label>
-    <input type="text" name="genre" asp-for="genre" /><br>
+    <input type="text" asp-for="Genre" /><br>
+
     <label>Cover Url</label>
-    <input type="text" name="coverUrl" asp-for="coverUrl" /><br>
+    <input type="text" asp-for="CoverUrl" /><br>
+
     <label>DateAdded</label>
-    <input type="date" name="dateAdded" asp-for="dateAdded" /><br>
+    <input type="date" asp-for="DateAdded" /><br>
+
     <label>Publisher:</label>
-    <select name="publisherId">
+    <select asp-for="PublisherID">
         @foreach (var item in listPublisher)
         {
             <option value="@item.Id">@item.Name</option>
         }
     </select>
     <br>
-    <label>Author</label>
-    <select name="authorIds" multiple>
+
+    <label>Author:</label>
+    <select asp-for="AuthorIds" multiple>
         @foreach (var item in listAuthor)
         {
             <option value="@item.Id">@item.FullName</option>
         }
     </select>
     <br>
+
     <input type="submit" value="Submit" />
 </form>

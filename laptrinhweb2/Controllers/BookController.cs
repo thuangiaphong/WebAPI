@@ -26,7 +26,7 @@ namespace laptrinhweb2.Controllers
             _bookRepository = bookRepository;
             _logger = logger;
         }
-
+        [AllowAnonymous]
         [HttpGet("get-all-books")]
         [Authorize(Roles = "Read")]
         public IActionResult GetAll([FromQuery] string? filterOn, [FromQuery] string? filterQuery,
@@ -49,6 +49,7 @@ namespace laptrinhweb2.Controllers
             var bookWithIdDTO = _bookRepository.GetBookById(id);
             return Ok(bookWithIdDTO);
         }
+        [AllowAnonymous]
         [HttpPost("add-book")]
         [Authorize(Roles = "Write")]
         [ValidateModel]
@@ -62,7 +63,7 @@ namespace laptrinhweb2.Controllers
             else return BadRequest(ModelState);
         }
 
-
+        [AllowAnonymous]
         [HttpPut("update-book-by-id/{id}")]
         [Authorize(Roles = "Write")]
         public IActionResult UpdateBookById(int id, [FromBody] AddBookRequestDTO bookDTO)

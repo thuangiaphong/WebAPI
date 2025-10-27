@@ -1,0 +1,54 @@
+﻿@model webMVC.Models.DTO.editDTO
+@{
+    var book = ViewBag.Book;
+    var listAuthor = ViewBag.ListAuthor;
+    var listPublisher = ViewBag.ListPublisher;
+}
+
+<h2>Edit Book</h2>
+
+<form asp-controller="Books" asp-action="editBook" asp-route-id="@book.Id" method="post">
+    <label>Title</label>
+    <input asp-for="Title" value="@book.Title" /><br />
+
+    <label>Description</label>
+    <input asp-for="Description" value="@book.Description" /><br />
+
+    <label>IsRead</label>
+    <input type="radio" asp-for="IsRead" value="True" checked="@(book.IsRead)" /> Yes
+    <input type="radio" asp-for="IsRead" value="False" checked="@(!book.IsRead)" /> No<br />
+
+    <label>DateRead</label>
+    <input type="datetime-local" asp-for="DateRead" value="@book.DateRead?.ToString("yyyy-MM-ddTHH:mm")" /><br />
+
+    <label>Rate</label>
+    <input asp-for="Rate" value="@book.Rate" /><br />
+
+    <label>Genre</label>
+    <input asp-for="Genre" value="@book.Genre" /><br />
+
+    <label>CoverUrl</label>
+    <input asp-for="CoverUrl" value="@book.CoverUrl" /><br />
+
+    <label>DateAdded</label>
+    <input type="datetime-local" asp-for="DateAdded" value="@book.DateAdded?.ToString("yyyy-MM-ddTHH:mm")" /><br />
+
+    <label>Publisher:</label>
+    <select asp-for="PublisherName">
+        @foreach (var item in listPublisher)
+        {
+            <option value="@item.Id" selected="@(item.Name == book.PublisherName)">@item.Name</option>
+        }
+    </select><br />
+
+    <label>Author:</label>
+    <select asp-for="AuthorNames" multiple>
+        @foreach (var item in listAuthor)
+        {
+            <option value="@item.Id"
+                    selected="@(book.AuthorNames.Contains(item.FullName))">@item.FullName</option>
+        }
+    </select><br />
+
+    <input type="submit" value="Save" />
+</form>

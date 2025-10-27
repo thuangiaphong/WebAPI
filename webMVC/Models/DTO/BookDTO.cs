@@ -2,16 +2,17 @@
 {
     public class BookDTO
     {
-        public int Id { get; set; } // [cite: 342]
-        public string? Title { get; set; } // [cite: 344]
-        public string? Description { get; set; } // [cite: 346]
-        public bool IsRead { get; set; } // [cite: 348]
-        public DateTime? DateRead { get; set; } // [cite: 350]
-        public int? Rate { get; set; } // [cite: 352]
-        public string? Genre { get; set; } // [cite: 354]
-        public string? CoverUrl { get; set; } // [cite: 356]
-        public DateTime DateAdded { get; set; } // [cite: 357]
-        public string PublisherName { get; set; } // [cite: 359]
-        public List<string> AuthorNames { get; set; } // [cite: 360]
+        public int Id { get; set; }
+        public string? Title { get; set; } 
+        public string? Description { get; set; } 
+        public bool IsRead { get; set; } 
+        public DateTime? DateRead { get; set; } 
+        public int? Rate { get; set; }
+        public string? Genre { get; set; }
+        public string? CoverUrl { get; set; }
+        public DateTime DateAdded { get; set; }
+        public string PublisherName { get; set; }
+        public List<string> AuthorNames { get; set; }
+         
     }
 }
